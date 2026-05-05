@@ -3,93 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pop Drink House</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Pop Drinks House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; text-align: center; }
-        header { padding: 20px; border-bottom: 2px solid #ff007f; margin-bottom: 20px; }
-        h1 { color: #ff007f; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
-        .drink-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .info { text-align: left; }
-        .info h3 { margin: 0; color: #ff007f; }
-        .price { color: #ffd700; font-weight: bold; }
-        .controls { display: flex; align-items: center; gap: 10px; }
-        button { background: #ff007f; border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 18px; }
-        .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; padding: 15px; border-top: 2px solid #ff007f; display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; }
-        .btn-whatsapp { background: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+        body { background: radial-gradient(circle at top, #2d0a1a 0%, #0a0a0a 100%); color: #e0e0e0; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; text-align: center; }
+        .header-logo { width: 150px; margin-top: 20px; border-radius: 50%; box-shadow: 0 0 20px #ff007f; }
+        .tagline { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin-top: 30px; opacity: 0.8; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin: 40px 0 10px; }
+        .drink-card { background: linear-gradient(145deg, #1a1a1a, #0d0d0d); border-radius: 20px; padding: 25px; margin-bottom: 25px; text-align: left; border: 1px solid rgba(255, 0, 127, 0.1); position: relative; }
+        .category { position: absolute; top: 15px; left: 15px; font-size: 9px; letter-spacing: 2px; border: 1px solid #ffd700; padding: 3px 10px; border-radius: 10px; color: #ffd700; text-transform: uppercase; }
+        .drink-img { width: 80px; display: block; margin: 0 auto 20px; }
+        h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin: 0; color: #fff; }
+        .ingredients { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ff007f; margin: 5px 0 20px; }
+        .detail { font-size: 13px; margin: 8px 0; color: #bbb; }
+        .detail b { color: #888; font-weight: 400; text-transform: uppercase; font-size: 11px; }
+        .ml { font-size: 12px; margin-top: 20px; opacity: 0.6; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .qty-selector { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 10px; }
+        button { background: none; border: none; color: #ff007f; font-size: 20px; font-weight: bold; cursor: pointer; }
+        .footer-info { font-size: 10px; opacity: 0.5; margin-top: 50px; padding-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Pop Drink House</h1>
-        <p>Cardápio Exclusivo 2025</p>
-    </header>
+    <div class="tagline">Cardápio Exclusivo • 2025</div>
+    <!-- Coloque o link da sua logo aqui se tiver -->
+    <img src="https://via.placeholder.com/150/ff007f/ffffff?text=POP+DRINKS" class="header-logo">
+    
+    <p style="font-size: 12px; margin-top: 40px; opacity: 0.7;">DRINKS ARTESANAIS</p>
+    <p style="font-size: 14px; opacity: 0.9;">Selecione seus drinks e finalize seu pedido com facilidade</p>
 
-    <div id="lista-drinks">
-        <!-- Item 0 -->
-        <div class="drink-card">
-            <div class="info"><h3>Neon Gin</h3><span class="price">R$ 32,00</span></div>
-            <div class="controls">
-                <button onclick="update(0, -1)">-</button>
-                <span id="q0">0</span>
+    <h2>Nossa Coleção</h2>
+    <p style="font-size: 12px; opacity: 0.6; margin-bottom: 40px;">Cada garrafa, uma experiência — 460 ml cuidadosamente preparados</p>
+
+    <!-- POP BLUE CREAM -->
+    <div class="drink-card">
+        <div class="category">Clássico</div>
+        <div style="width:60px; height:60px; background: radial-gradient(#0077ff, #001133); border-radius:50%; margin: 0 auto 20px; box-shadow: 0 0 20px #0077ff;"></div>
+        <h3>POP Blue Cream</h3>
+        <div class="ingredients">Vodka • Curaçao • Cremoso</div>
+        <div class="detail"><b>Base —</b> Vodka</div>
+        <div class="detail"><b>Toque —</b> Xarope Blue Curaçao</div>
+        <div class="detail"><b>Textura —</b> Leite condensado e leite integral</div>
+        <div class="detail"><b>Finalização —</b> Gotas de Angostura</div>
+        <div class="ml">460 ML</div>
+        <div class="controls">
+            <span style="font-size: 12px; letter-spacing: 2px;">QUANTIDADE</span>
+            <div class="qty-selector">
+                <button onclick="update(0, -1)">−</button>
+                <span id="q0" style="font-weight: bold;">0</span>
                 <button onclick="update(0, 1)">+</button>
             </div>
         </div>
-        <!-- Item 1 -->
-        <div class="drink-card">
-            <div class="info"><h3>Sex on the Beach</h3><span class="price">R$ 28,00</span></div>
-            <div class="controls">
-                <button onclick="update(1, -1)">-</button>
-                <span id="q1">0</span>
+    </div>
+
+    <!-- POP BERRY CREAM -->
+    <div class="drink-card">
+        <div class="category">Favorito</div>
+        <div style="font-size: 40px; text-align: center; margin-bottom: 20px;">🍓</div>
+        <h3>POP Berry Cream</h3>
+        <div class="ingredients">Vodka • Morango • Cremoso</div>
+        <div class="detail"><b>Base —</b> Vodka</div>
+        <div class="detail"><b>Toque —</b> Xarope de morango</div>
+        <div class="detail"><b>Textura —</b> Leite condensado e leite integral</div>
+        <div class="detail"><b>Finalização —</b> Gotas de Angostura</div>
+        <div class="ml">460 ML</div>
+        <div class="controls">
+            <span style="font-size: 12px; letter-spacing: 2px;">QUANTIDADE</span>
+            <div class="qty-selector">
+                <button onclick="update(1, -1)">−</button>
+                <span id="q1" style="font-weight: bold;">0</span>
                 <button onclick="update(1, 1)">+</button>
             </div>
         </div>
-        <!-- Item 2 -->
-        <div class="drink-card">
-            <div class="info"><h3>Caipirinha Especial</h3><span class="price">R$ 22,00</span></div>
-            <div class="controls">
-                <button onclick="update(2, -1)">-</button>
-                <span id="q2">0</span>
-                <button onclick="update(2, 1)">+</button>
-            </div>
-        </div>
-        <!-- Item 3 -->
-        <div class="drink-card">
-            <div class="info"><h3>Mojito Refresh</h3><span class="price">R$ 25,00</span></div>
-            <div class="controls">
-                <button onclick="update(3, -1)">-</button>
-                <span id="q3">0</span>
-                <button onclick="update(3, 1)">+</button>
-            </div>
-        </div>
     </div>
 
-    <div style="height: 100px;"></div>
-
-    <div class="footer">
-        <div>Total: <span id="total" style="color:#ffd700">R$ 0,00</span></div>
-        <a href="#" class="btn-whatsapp" onclick="enviar()">Pedir no Whats</a>
+    <div class="footer-info">
+        © 2025 • DRINKS ARTESANAIS • @POPDRINKHOUSE
     </div>
 
     <script>
-        let itens = [
-            {n: 'Neon Gin', p: 32, q: 0},
-            {n: 'Sex on the Beach', p: 28, q: 0},
-            {n: 'Caipirinha Especial', p: 22, q: 0},
-            {n: 'Mojito Refresh', p: 25, q: 0}
-        ];
+        let itens = [{n:'Blue Cream', q:0}, {n:'Berry Cream', q:0}];
         function update(i, c) {
             itens[i].q = Math.max(0, itens[i].q + c);
             document.getElementById('q'+i).innerText = itens[i].q;
-            let t = itens.reduce((a, b) => a + (b.p * b.q), 0);
-            document.getElementById('total').innerText = 'R$ ' + t.toFixed(2).replace('.', ',');
-        }
-        function enviar() {
-            let msg = "Olá! Gostaria de fazer um pedido:\n";
-            let pedido = itens.filter(i => i.q > 0);
-            if(pedido.length === 0) return alert("Adicione pelo menos um drink!");
-            pedido.forEach(i => { msg += `${i.q}x ${i.n}\n`; });
-            window.open("https://wa.me/5512996146442?text=" + encodeURIComponent(msg));
         }
     </script>
 </body>
