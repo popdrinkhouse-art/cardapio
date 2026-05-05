@@ -8,12 +8,13 @@
     <style>
         body { background-color: #0a0a0a; color: white; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; text-align: center; }
         header { padding: 20px; border-bottom: 2px solid #ff007f; margin-bottom: 20px; }
-        h1 { color: #ff007f; text-transform: uppercase; letter-spacing: 2px; }
+        h1 { color: #ff007f; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
         .drink-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .info h3 { margin: 0; color: #ff007f; text-align: left; }
+        .info { text-align: left; }
+        .info h3 { margin: 0; color: #ff007f; }
         .price { color: #ffd700; font-weight: bold; }
         .controls { display: flex; align-items: center; gap: 10px; }
-        button { background: #ff007f; border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-weight: bold; }
+        button { background: #ff007f; border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 18px; }
         .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; padding: 15px; border-top: 2px solid #ff007f; display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; }
         .btn-whatsapp { background: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; }
     </style>
@@ -24,19 +25,22 @@
         <p>Cardápio Exclusivo 2025</p>
     </header>
 
-    <div class="drink-card">
-        <div class="info">
-            <h3>Neon Gin</h3>
-            <span class="price">R$ 32,00</span>
-        </div>
-        <div class="controls">
-            <button onclick="update(0, -1)">-</button>
-            <span id="q0">0</span>
-            <button onclick="update(0, 1)">+</button>
+    <div id="lista-drinks">
+        <!-- O Gin que você já tem -->
+        <div class="drink-card">
+            <div class="info">
+                <h3>Neon Gin</h3>
+                <span class="price">R$ 32,00</span>
+            </div>
+            <div class="controls">
+                <button onclick="update(0, -1)">-</button>
+                <span id="q0">0</span>
+                <button onclick="update(0, 1)">+</button>
+            </div>
         </div>
     </div>
 
-    <div style="height: 80px;"></div>
+    <div style="height: 100px;"></div>
 
     <div class="footer">
         <div>Total: <span id="total" style="color:#ffd700">R$ 0,00</span></div>
@@ -49,12 +53,14 @@
             itens[i].q = Math.max(0, itens[i].q + c);
             document.getElementById('q'+i).innerText = itens[i].q;
             let t = itens.reduce((a, b) => a + (b.p * b.q), 0);
-            document.getElementById('total').innerText = 'R$ ' + t.toFixed(2);
+            document.getElementById('total').innerText = 'R$ ' + t.toFixed(2).replace('.', ',');
         }
         function enviar() {
-            let msg = "Olá! Gostaria de pedir: ";
-            itens.forEach(i => { if(i.q > 0) msg += i.q + "x " + i.n + "; "; });
-            window.open("https://wa.me/SEUNUMERO?text=" + encodeURIComponent(msg));
+            let msg = "Olá! Gostaria de fazer um pedido:\n";
+            let pedido = itens.filter(i => i.q > 0);
+            if(pedido.length === 0) return alert("Adicione pelo menos um drink!");
+            pedido.forEach(i => { msg += `${i.q}x ${i.n}\n`; });
+            window.open("https://wa.me/5511999999999?text=" + encodeURIComponent(msg));
         }
     </script>
 </body>
