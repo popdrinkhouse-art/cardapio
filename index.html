@@ -26,16 +26,40 @@
     </header>
 
     <div id="lista-drinks">
-        <!-- O Gin que você já tem -->
+        <!-- Item 0 -->
         <div class="drink-card">
-            <div class="info">
-                <h3>Neon Gin</h3>
-                <span class="price">R$ 32,00</span>
-            </div>
+            <div class="info"><h3>Neon Gin</h3><span class="price">R$ 32,00</span></div>
             <div class="controls">
                 <button onclick="update(0, -1)">-</button>
                 <span id="q0">0</span>
                 <button onclick="update(0, 1)">+</button>
+            </div>
+        </div>
+        <!-- Item 1 -->
+        <div class="drink-card">
+            <div class="info"><h3>Sex on the Beach</h3><span class="price">R$ 28,00</span></div>
+            <div class="controls">
+                <button onclick="update(1, -1)">-</button>
+                <span id="q1">0</span>
+                <button onclick="update(1, 1)">+</button>
+            </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="drink-card">
+            <div class="info"><h3>Caipirinha Especial</h3><span class="price">R$ 22,00</span></div>
+            <div class="controls">
+                <button onclick="update(2, -1)">-</button>
+                <span id="q2">0</span>
+                <button onclick="update(2, 1)">+</button>
+            </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="drink-card">
+            <div class="info"><h3>Mojito Refresh</h3><span class="price">R$ 25,00</span></div>
+            <div class="controls">
+                <button onclick="update(3, -1)">-</button>
+                <span id="q3">0</span>
+                <button onclick="update(3, 1)">+</button>
             </div>
         </div>
     </div>
@@ -48,7 +72,12 @@
     </div>
 
     <script>
-        let itens = [{n: 'Neon Gin', p: 32, q: 0}];
+        let itens = [
+            {n: 'Neon Gin', p: 32, q: 0},
+            {n: 'Sex on the Beach', p: 28, q: 0},
+            {n: 'Caipirinha Especial', p: 22, q: 0},
+            {n: 'Mojito Refresh', p: 25, q: 0}
+        ];
         function update(i, c) {
             itens[i].q = Math.max(0, itens[i].q + c);
             document.getElementById('q'+i).innerText = itens[i].q;
