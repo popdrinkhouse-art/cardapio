@@ -1,90 +1,490 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pop Drinks House</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-    <style>
-        body { background: radial-gradient(circle at top, #2d0a1a 0%, #0a0a0a 100%); color: #e0e0e0; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; text-align: center; min-height: 100vh; }
-        .logo-top { width: 150px; margin: 20px auto; display: block; border-radius: 50%; box-shadow: 0 0 20px rgba(255, 0, 127, 0.5); }
-        .tagline { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 20px 0; opacity: 0.8; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 26px; margin: 30px 0 10px; color: #fff; }
-        .drink-card { background: linear-gradient(145deg, #1a1a1a, #0d0d0d); border-radius: 20px; padding: 25px; margin-bottom: 25px; text-align: left; border: 1px solid rgba(255, 0, 127, 0.1); position: relative; }
-        .category { position: absolute; top: 15px; left: 15px; font-size: 9px; border: 1px solid #ffd700; padding: 3px 10px; border-radius: 10px; color: #ffd700; text-transform: uppercase; }
-        .drink-img { width: 70px; display: block; margin: 0 auto 15px; }
-        h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin: 0; color: #fff; }
-        .ingredients { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ff007f; margin: 5px 0 20px; }
-        .detail { font-size: 13px; margin: 8px 0; color: #bbb; line-height: 1.4; }
-        .detail b { color: #888; font-weight: 400; text-transform: uppercase; font-size: 11px; margin-right: 5px; }
-        .wine-options { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1); }
-        .wine-options label { display: block; font-size: 12px; margin: 8px 0; cursor: pointer; color: #00aaff; font-weight: bold; }
-        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); pt: 15px; }
-        .qty-selector { display: flex; align-items: center; gap: 15px; background: rgba(255,0,127,0.1); padding: 5px 15px; border-radius: 12px; border: 1px solid rgba(255,0,127,0.3); }
-        button { background: none; border: none; color: #ff007f; font-size: 24px; font-weight: bold; cursor: pointer; padding: 0 5px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pop Drink House — Cardápio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink:       #e91e8c;
+      --pink-light: #f472b6;
+      --pink-pale:  #fce4f3;
+      --pink-dark:  #c0186f;
+      --dark:       #1a0a12;
+      --dark2:      #2d1020;
+      --card-bg:    rgba(255,255,255,0.07);
+      --white:      #ffffff;
+      --gray:       #d1b0c5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(160deg, #1a0a12 0%, #2d1020 50%, #1a0a12 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: var(--white);
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    header::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--pink-light));
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+    .logo-wrap img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--pink);
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(233,30,140,0.4);
+      margin-bottom: 14px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--pink-light), var(--white));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p.tagline {
+      font-size: .8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      margin-top: 4px;
+    }
+    .section-title {
+      text-align: center;
+      margin: 30px 0 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--pink-light);
+    }
+    .section-title span {
+      border-bottom: 2px solid var(--pink);
+      padding-bottom: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 14px;
+      padding: 0 16px 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(233,30,140,0.25);
+      border-radius: 16px;
+      padding: 14px 12px 12px;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      position: relative;
+      user-select: none;
+    }
+    .card:active { transform: scale(.96); }
+    .card.selected {
+      border-color: var(--pink);
+      background: rgba(233,30,140,0.15);
+      box-shadow: 0 0 18px rgba(233,30,140,0.3);
+    }
+    .card-emoji { font-size: 2rem; display: block; text-align: center; margin-bottom: 6px; }
+    .card-name  { font-size: .85rem; font-weight: 600; text-align: center; color: var(--white); }
+    .card-price { font-size: .8rem; font-weight: 700; color: var(--pink-light); text-align: center; margin-top: 4px; }
+    .card-desc  { font-size: .7rem; color: var(--gray); text-align: center; margin-top: 4px; line-height: 1.4; }
+    .qty-badge {
+      position: absolute; top: -8px; right: -8px;
+      background: var(--pink); color: #fff;
+      font-size: .7rem; font-weight: 700;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,.4);
+    }
+    .qty-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 8px;
+    }
+    .qty-controls button {
+      background: var(--pink); border: none; color: #fff;
+      width: 24px; height: 24px; border-radius: 50%;
+      font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qty-controls span { font-size: .85rem; font-weight: 600; min-width: 18px; text-align: center; }
+
+    /* CART BAR */
+    #cart-bar {
+      position: fixed; bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink));
+      color: #fff;
+      padding: 14px 28px; border-radius: 50px;
+      font-size: .9rem; font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(233,30,140,0.5);
+      display: none; align-items: center; gap: 10px;
+      z-index: 100; white-space: nowrap;
+    }
+    #cart-bar.show { display: flex; }
+
+    /* OVERLAY */
+    #overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 200; align-items: flex-end; justify-content: center;
+    }
+    #overlay.show { display: flex; }
+
+    /* CHECKOUT */
+    #checkout {
+      background: linear-gradient(180deg, #2d1020 0%, #1a0a12 100%);
+      border-top: 2px solid var(--pink);
+      border-radius: 24px 24px 0 0;
+      width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 24px 20px 32px;
+    }
+    #checkout h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--pink-light);
+      margin-bottom: 16px; text-align: center;
+    }
+    .order-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: .85rem;
+    }
+    .order-item-name { color: var(--white); }
+    .order-item-price { color: var(--pink-light); font-weight: 600; }
+    .total-row {
+      display: flex; justify-content: space-between;
+      margin-top: 14px; padding-top: 10px;
+      border-top: 2px solid var(--pink);
+      font-size: 1rem; font-weight: 700;
+    }
+    .total-row span:last-child { color: var(--pink-light); }
+
+    /* FIELDS — CORRIGIDO */
+    .field-label {
+      font-size: .8rem; font-weight: 600;
+      color: var(--pink-light);   /* ✅ rosa claro */
+      margin-top: 18px; margin-bottom: 6px;
+      display: block; letter-spacing: .5px;
+    }
+    .field-input {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(233,30,140,0.4);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #ffffff;              /* ✅ texto branco */
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem; outline: none;
+      transition: border-color .2s;
+      -webkit-text-fill-color: #ffffff; /* ✅ força branco no iOS */
+    }
+    .field-input::placeholder { color: rgba(255,255,255,0.4); }
+    .field-input:focus { border-color: var(--pink); }
+
+    /* PAYMENT */
+    .pay-options { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+    .pay-btn {
+      flex: 1; min-width: 80px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(233,30,140,0.3);
+      border-radius: 10px; padding: 10px 6px;
+      color: var(--gray); font-size: .8rem; font-weight: 600;
+      cursor: pointer; text-align: center;
+      transition: all .2s;
+    }
+    .pay-btn.active {
+      background: rgba(233,30,140,0.2);
+      border-color: var(--pink);
+      color: var(--pink-light);
+    }
+
+    /* SEND BUTTON — CORRIGIDO */
+    #send-btn {
+      width: 100%; margin-top: 20px; padding: 16px;
+      border: none; border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink));
+      color: #ffffff;             /* ✅ texto branco visível */
+      -webkit-text-fill-color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: .5px; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(233,30,140,0.45);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    #cancel-btn {
+      width: 100%; margin-top: 10px; padding: 12px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      color: var(--gray);
+      font-family: 'Poppins', sans-serif; font-size: .85rem; cursor: pointer;
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed; bottom: 80px; left: 50%;
+      transform: translateX(-50%);
+      background: #222; color: var(--pink-light);
+      padding: 10px 22px; border-radius: 30px;
+      font-size: .8rem; font-weight: 600;
+      z-index: 300; opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    #toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      padding: 30px 16px 100px;
+      font-size: .7rem; color: rgba(255,255,255,0.25);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="tagline">Cardápio Exclusivo • 2025</div>
-    
-    <img src="LINK_DA_SUA_LOGO_AQUI" class="logo-top" alt="Pop Drinks Logo">
+<header>
+  <div class="logo-wrap">
+    <img src="logo.jpeg" alt="Pop Drink House" onerror="this.style.display='none'" />
+  </div>
+  <h1>Pop Drink House</h1>
+  <p class="tagline">Cardápio Exclusivo · 2025</p>
+</header>
 
-    <p style="font-size: 12px; opacity: 0.7;">DRINKS ARTESANAIS</p>
-    <h2>Nossa Coleção</h2>
-    <p style="font-size: 11px; opacity: 0.5; margin-bottom: 30px;">460 ML • PREPARO ESPECIAL</p>
+<p class="section-title"><span>🫐 Açaís</span></p>
+<div class="grid" id="grid-acai"></div>
 
-    <div class="drink-card">
-        <div class="category">Clássico</div>
-        <div style="width:50px; height:50px; background:blue; border-radius:50%; margin: 0 auto 15px; filter: blur(10px); opacity:0.6;"></div>
-        <h3>POP Blue Cream</h3>
-        <div class="ingredients">Vodka • Curaçao • Cremoso</div>
-        <div class="detail"><b>Base —</b> Vodka</div>
-        <div class="detail"><b>Textura —</b> Leite condensado e leite integral</div>
-        <div class="controls"><span>QUANTIDADE</span><div class="qty-selector"><button onclick="update(0,-1)">-</button><span id="q0">0</span><button onclick="update(0,1)">+</button></div></div>
+<p class="section-title"><span>🍹 Sucos &amp; Vitaminas</span></p>
+<div class="grid" id="grid-sucos"></div>
+
+<p class="section-title"><span>🧃 Drinks &amp; Especiais</span></p>
+<div class="grid" id="grid-drinks"></div>
+
+<div id="cart-bar">
+  🛒 <span id="cart-label">Ver pedido</span>
+</div>
+
+<div id="overlay">
+  <div id="checkout">
+    <h2>🩷 Seu Pedido</h2>
+    <div id="order-list"></div>
+    <div class="total-row">
+      <span>Total</span>
+      <span id="total-price">R$ 0,00</span>
     </div>
 
-    <div class="drink-card">
-        <div class="category">Favorito</div>
-        <div style="font-size:40px; text-align:center; margin-bottom:15px;">🍓</div>
-        <h3>POP Berry Cream</h3>
-        <div class="ingredients">Vodka • Morango • Cremoso</div>
-        <div class="detail"><b>Base —</b> Vodka</div>
-        <div class="detail"><b>Toque —</b> Xarope de morango</div>
-        <div class="controls"><span>QUANTIDADE</span><div class="qty-selector"><button onclick="update(1,-1)">-</button><span id="q1">0</span><button onclick="update(1,1)">+</button></div></div>
+    <label class="field-label" for="customer-name">Seu nome</label>
+    <input id="customer-name" class="field-input" type="text" placeholder="Ex: Maria" />
+
+    <label class="field-label" for="obs-field">Observações (opcional)</label>
+    <textarea id="obs-field" class="field-input" rows="2"
+      placeholder="Ex: sem granola, extra mel…" style="resize:none;"></textarea>
+
+    <label class="field-label">Forma de pagamento</label>
+    <div class="pay-options">
+      <button class="pay-btn" data-pay="Pix">💸 Pix</button>
+      <button class="pay-btn" data-pay="Cartão de Crédito">💳 Crédito</button>
+      <button class="pay-btn" data-pay="Cartão de Débito">🏧 Débito</button>
+      <button class="pay-btn" data-pay="Dinheiro">💵 Dinheiro</button>
     </div>
 
-    <div class="drink-card">
-        <div class="category">Tropical</div>
-        <div style="font-size:40px; text-align:center; margin-bottom:15px;">🥥</div>
-        <h3>POP Coco Cream</h3>
-        <div class="ingredients">Vodka • Coco • Cremoso</div>
-        <div class="detail"><b>Base —</b> Vodka ou Rum</div>
-        <div class="detail"><b>Toque —</b> Leite de coco</div>
-        <div class="detail"><b>Textura —</b> Leite condensado e leite integral</div>
-        <div class="controls"><span>QUANTIDADE</span><div class="qty-selector"><button onclick="update(2,-1)">-</button><span id="q2">0</span><button onclick="update(2,1)">+</button></div></div>
-    </div>
+    <button id="send-btn">📲 Enviar pedido via WhatsApp</button>
+    <button id="cancel-btn">← Voltar ao cardápio</button>
+  </div>
+</div>
 
-    <div class="drink-card">
-        <div class="category">Especial</div>
-        <div style="font-size:40px; text-align:center; margin-bottom:15px;">🍷</div>
-        <h3>POP Ruby Wine</h3>
-        <div class="ingredients">Vinho • Frutas • Artesanal</div>
-        <div class="detail"><b>Base —</b> Vinho suave selecionado</div>
-        <div class="wine-options">
-            <p style="font-size: 10px; margin-bottom: 10px; color: #ffd700;">ESCOLHA O SABOR:</p>
-            <label><input type="radio" name="wine_type" value="Com Frutas" checked> VINHO COM FRUTAS</label>
-            <label><input type="radio" name="wine_type" value="Cremoso"> VINHO CREMOSO</label>
-        </div>
-        <div class="controls"><span>QUANTIDADE</span><div class="qty-selector"><button onclick="update(3,-1)">-</button><span id="q3">0</span><button onclick="update(3,1)">+</button></div></div>
-    </div>
+<div id="toast"></div>
+<footer>Pop Drink House © 2025 · Feito com 🩷</footer>
 
-    <script>
-        let q = [0,0,0,0];
-        function update(i, v) {
-            q[i] = Math.max(0, q[i] + v);
-            document.getElementById('q'+i).innerText = q[i];
-        }
-    </script>
+<script>
+  // ══════════════════════════════════════
+  //  ⚙️  CONFIGURE AQUI
+  // ══════════════════════════════════════
+  // Coloque o número com DDI+DDD, sem espaços ou traços
+  // Ex: "5511999999999"  (55 = Brasil, 11 = SP, 9 dígitos)
+  const WHATSAPP_NUMBER = "55XXXXXXXXXXX"; // ← TROQUE AQUI
+
+  // ══════════════════════════════════════
+  //  🍦  PRODUTOS — edite à vontade!
+  // ══════════════════════════════════════
+  const products = {
+    "grid-acai": [
+      { id:"a1", emoji:"🫐", name:"Açaí 300ml",    price:15.00, desc:"Base cremosa com granola e banana" },
+      { id:"a2", emoji:"🫐", name:"Açaí 500ml",    price:22.00, desc:"Base cremosa com granola e banana" },
+      { id:"a3", emoji:"🫐", name:"Açaí 700ml",    price:29.00, desc:"Base cremosa com granola e banana" },
+      { id:"a4", emoji:"✨", name:"Açaí Especial", price:32.00, desc:"Com Nutella, morango e granola" },
+    ],
+    "grid-sucos": [
+      { id:"s1", emoji:"🍊", name:"Suco Natural",   price:10.00, desc:"Laranja, limão ou maracujá" },
+      { id:"s2", emoji:"🍓", name:"Vitamina",        price:13.00, desc:"Morango, banana ou mamão" },
+      { id:"s3", emoji:"🥭", name:"Suco Tropical",  price:14.00, desc:"Manga, abacaxi ou melancia" },
+    ],
+    "grid-drinks": [
+      { id:"d1", emoji:"🧃", name:"Drink Refrescante", price:18.00, desc:"Limonada especial da casa" },
+      { id:"d2", emoji:"🌸", name:"Drink Rosa",         price:20.00, desc:"Hibisco, framboesa e limão" },
+      { id:"d3", emoji:"🥤", name:"Milkshake",          price:22.00, desc:"Morango, chocolate ou baunilha" },
+    ],
+  };
+
+  // ══════════════════════════════════════
+  //  STATE
+  // ══════════════════════════════════════
+  const cart = {};
+  let selectedPayment = "";
+
+  function fmt(v){ return "R$ " + v.toFixed(2).replace(".",","); }
+
+  function getAllProducts(){ return Object.values(products).flat(); }
+
+  function totalItems(){ return Object.values(cart).reduce((a,b)=>a+b,0); }
+
+  function totalPrice(){
+    let s = 0;
+    Object.entries(cart).forEach(([id,qty])=>{
+      const p = getAllProducts().find(x=>x.id===id);
+      if(p) s += p.price * qty;
+    });
+    return s;
+  }
+
+  // ══════════════════════════════════════
+  //  RENDER
+  // ══════════════════════════════════════
+  function renderCards(){
+    Object.entries(products).forEach(([gridId, items])=>{
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = "";
+      items.forEach(p=>{
+        const qty = cart[p.id]||0;
+        const div = document.createElement("div");
+        div.className = "card"+(qty>0?" selected":"");
+        div.innerHTML = `
+          ${qty>0?`<div class="qty-badge">${qty}</div>`:""}
+          <span class="card-emoji">${p.emoji}</span>
+          <div class="card-name">${p.name}</div>
+          <div class="card-price">${fmt(p.price)}</div>
+          <div class="card-desc">${p.desc}</div>
+          ${qty>0?`
+          <div class="qty-controls" onclick="event.stopPropagation()">
+            <button onclick="changeQty('${p.id}',-1)">−</button>
+            <span>${qty}</span>
+            <button onclick="changeQty('${p.id}',1)">+</button>
+          </div>`:""}
+        `;
+        div.addEventListener("click",()=>addOne(p.id));
+        grid.appendChild(div);
+      });
+    });
+    updateCartBar();
+  }
+
+  function addOne(id){
+    cart[id]=(cart[id]||0)+1;
+    renderCards();
+    showToast("✓ Adicionado!");
+  }
+
+  function changeQty(id, delta){
+    cart[id] = Math.max(0,(cart[id]||0)+delta);
+    if(cart[id]===0) delete cart[id];
+    renderCards();
+  }
+
+  function updateCartBar(){
+    const bar = document.getElementById("cart-bar");
+    const n = totalItems();
+    if(n>0){
+      bar.classList.add("show");
+      document.getElementById("cart-label").textContent =
+        `${n} ${n===1?"item":"itens"} · ${fmt(totalPrice())} — Ver pedido`;
+    } else {
+      bar.classList.remove("show");
+    }
+  }
+
+  // ══════════════════════════════════════
+  //  CHECKOUT
+  // ══════════════════════════════════════
+  document.getElementById("cart-bar").addEventListener("click", openCheckout);
+
+  function openCheckout(){
+    const list = document.getElementById("order-list");
+    list.innerHTML="";
+    getAllProducts().forEach(p=>{
+      const qty = cart[p.id]||0;
+      if(!qty) return;
+      const row = document.createElement("div");
+      row.className="order-item";
+      row.innerHTML=`
+        <span class="order-item-name">${p.emoji} ${p.name} × ${qty}</span>
+        <span class="order-item-price">${fmt(p.price*qty)}</span>
+      `;
+      list.appendChild(row);
+    });
+    document.getElementById("total-price").textContent=fmt(totalPrice());
+    document.getElementById("overlay").classList.add("show");
+  }
+
+  document.getElementById("cancel-btn").addEventListener("click",()=>{
+    document.getElementById("overlay").classList.remove("show");
+  });
+
+  document.getElementById("overlay").addEventListener("click",e=>{
+    if(e.target===document.getElementById("overlay"))
+      document.getElementById("overlay").classList.remove("show");
+  });
+
+  document.querySelectorAll(".pay-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".pay-btn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedPayment=btn.dataset.pay;
+    });
+  });
+
+  document.getElementById("send-btn").addEventListener("click",()=>{
+    const name=document.getElementById("customer-name").value.trim();
+    const obs =document.getElementById("obs-field").value.trim();
+    if(!name){ showToast("⚠️ Informe seu nome!"); return; }
+    if(!selectedPayment){ showToast("⚠️ Escolha o pagamento!"); return; }
+
+    let msg=`🩷 *Pedido — Pop Drink House*\n\n`;
+    msg+=`👤 *Cliente:* ${name}\n\n`;
+    msg+=`🛒 *Itens:*\n`;
+    getAllProducts().forEach(p=>{
+      const qty=cart[p.id]||0;
+      if(!qty) return;
+      msg+=`  • ${p.emoji} ${p.name} × ${qty} — ${fmt(p.price*qty)}\n`;
+    });
+    msg+=`\n💰 *Total: ${fmt(totalPrice())}*\n`;
+    msg+=`💳 *Pagamento:* ${selectedPayment}\n`;
+    if(obs) msg+=`\n📝 *Obs:* ${obs}\n`;
+    msg+=`\n_Enviado pelo cardápio digital_ 🍹`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,"_blank");
+  });
+
+  // TOAST
+  let toastT;
+  function showToast(msg){
+    const t=document.getElementById("toast");
+    t.textContent=msg; t.classList.add("show");
+    clearTimeout(toastT);
+    toastT=setTimeout(()=>t.classList.remove("show"),2000);
+  }
+
+  renderCards();
+</script>
 </body>
 </html>
